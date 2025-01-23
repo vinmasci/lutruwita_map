@@ -11,12 +11,16 @@ Interactive mapping platform for Tasmania cyclists and hikers. Complete rebuild 
 6. [Database Schema](DATABASE_SCHEMA.md) - Data structure
 7. [Dev Setup](DEV_SETUP.md) - Development environment
 8. [Bootstrap Guide](BOOTSTRAP.md) - Initial project setup
+9. [GPX Surface Matching](GPX_SURFACE_MATCHING.md) - Enhanced surface detection system
 
 ## Project Status
 Migration from lutruwita2 (github.com/vinmasci/lutruwita2)
 - [ ] Phase 0: Architecture Setup (1 week)
 - [ ] Phase 1: Project Setup (1 week)
 - [ ] Phase 2: Core Features (3 weeks)
+  - Enhanced surface detection with Mapbox Map Matching
+  - Surface caching system
+  - Improved GPS drift handling
 - [ ] Phase 3: Backend Setup (2 weeks)
 - [ ] Phase 4: Testing (1 week)
 
@@ -31,6 +35,7 @@ Migration from lutruwita2 (github.com/vinmasci/lutruwita2)
 - PostgreSQL 14+ with PostGIS
 - MongoDB 6+
 - pnpm
+- Mapbox API key
 ```
 
 ## Quick Start
