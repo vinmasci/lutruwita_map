@@ -1,94 +1,123 @@
 # Implementation Plan
 
-## Architecture Overview
+This plan details the migration from lutruwita2 to lutruwita_map, with clear steps for feature transfer and implementation.
 
-### Frontend Architecture
-- React with TypeScript for type safety
-- Feature-based modular structure
-- Shared components and utilities
-- State management with React Context/Hooks
-- MapboxGL for map rendering
-- Auth0 for authentication
+## Source Repository
+- Original: github.com/vinmasci/lutruwita2
+- Key files to reference:
+  - src/components/map-container.tsx
+  - server.ts
+  - src/services/gpx-processor.ts
 
-### Backend Architecture
-- Express.js with TypeScript
-- MongoDB for data persistence
-- RESTful API design
-- Service-based business logic
-- Middleware for auth/validation
+## Feature Migration Checklist
 
-## Implementation Phases
+### 1. Project Setup [Status: Not Started]
+- [ ] Initialize Vite + React + TypeScript
+  - Command: `npm create vite@latest lutruwita_map`
+  - Notes: 
 
-### Phase 1: Project Setup
-- [ ] Initialize repository
-- [ ] Configure TypeScript
-- [ ] Setup Vite
-- [ ] Configure ESLint/Prettier
-- [ ] Setup test environment
-
-### Phase 2: Core Infrastructure
-- [ ] Create base directories
+- [ ] Core Dependencies
+  ```json
+  {
+    "dependencies": {
+      "@mapbox/mapbox-gl-draw": "^1.4.3",
+      "mapbox-gl": "^2.15.0",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "@auth0/auth0-react": "^2.2.1",
+      "express": "^4.18.2",
+      "mongodb": "^5.7.0"
+    }
+  }
   ```
-  src/
-    features/
-    shared/
-    lib/
-    app/
-  ```
-- [ ] Setup routing
-- [ ] Configure Mapbox
-- [ ] Initialize Auth0
-- [ ] Setup MongoDB connection
+  - Notes:
 
-### Phase 3: Feature Implementation
+### 2. Map Features [Status: Not Started]
+From: src/components/map-container.tsx
+- [ ] Basic Map Display
+  - Mapbox setup
+  - Custom styling
+  - Controls implementation
+  - Notes:
 
-#### Auth Feature
-- [ ] Auth0 integration
-- [ ] Protected routes
-- [ ] User context
-- [ ] Login/logout flow
+- [ ] Route Management
+  - [ ] Route drawing tools
+  - [ ] GPX file upload
+  - [ ] Route saving/loading
+  - Source files:
+    - src/services/gpx-processor.ts
+    - src/components/ui/gpx-uploader.tsx
+  - Notes:
 
-#### Maps Feature
-- [ ] MapContainer setup
-  - [ ] Basic map rendering
-  - [ ] Controls
-  - [ ] Layer management
-- [ ] Route handling
-  - [ ] Drawing
-  - [ ] Saving
-  - [ ] Loading
-- [ ] Surface detection
-  - [ ] API integration
-  - [ ] Visualization
+- [ ] Surface Detection
+  - [ ] PostGIS integration
+  - [ ] Surface visualization
+  - Source: server.ts (detectSurface endpoint)
+  - Notes:
 
-#### Photos Feature
-- [ ] Upload functionality
-- [ ] Storage integration
-- [ ] Photo markers
-- [ ] Gallery view
+### 3. Photo Features [Status: Not Started]
+From: src/components/ui/photo-modal.tsx
+- [ ] Upload System
+  - [ ] DO Spaces integration
+  - [ ] Location tagging
+  - Source: server.ts (uploadPhoto endpoint)
+  - Notes:
 
-#### Profiles Feature
-- [ ] User profiles
-- [ ] Settings management
-- [ ] Social links
+### 4. Authentication [Status: Not Started]
+From: server.ts (Auth0 config)
+- [ ] Auth0 Setup
+  - [ ] Login/logout
+  - [ ] Protected routes
+  - [ ] Profile management
+  - Notes:
 
-### Phase 4: Backend Implementation
-- [ ] Setup Express server
-- [ ] Configure routes
-- [ ] Implement services
-- [ ] Add middleware
-- [ ] Database integration
+### 5. Database [Status: Not Started]
+From: server.ts
+- [ ] MongoDB Setup
+  - Collections needed:
+    - users
+    - routes
+    - photos
+    - maps
+  - Notes:
 
-### Phase 5: Testing & Polish
-- [ ] Unit tests
-- [ ] Integration tests
-- [ ] Performance optimization
-- [ ] Documentation
-- [ ] Deployment setup
+### 6. Server Implementation [Status: Not Started]
+From: server.ts
+- [ ] Express Setup
+  - [ ] Route handlers
+  - [ ] Middleware
+  - [ ] Error handling
+  - Notes:
 
-## Migration Notes
-- Track progress here
-- Document decisions
-- Note technical debt
+## Testing Requirements
+- [ ] Unit Tests
+  - Components
+  - Services
+  - Utils
+- [ ] Integration Tests
+  - API endpoints
+  - Data flow
+- [ ] E2E Tests
+  - User flows
+  - Map interactions
 
-Last Updated: [Date]
+## Documentation Standards
+- Every component needs:
+  - TypeScript interfaces
+  - Usage examples
+  - Props documentation
+
+## Progress Tracking
+- Check off items as completed
+- Add implementation notes under each section
+- Document any deviations from plan
+- Note technical debt items
+
+## Completion Criteria
+- All features from lutruwita2 implemented
+- Tests passing
+- Documentation complete
+- Performance metrics met
+
+Last Updated: 2025-01-23
+Current Phase: Setup
