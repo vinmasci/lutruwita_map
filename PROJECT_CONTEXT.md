@@ -1,87 +1,140 @@
 # Project Context
 
-## Purpose
-Rebuild of lutruwita2 to address:
-- Performance issues with large routes
-- Complex surface detection logic
-- Photo management scaling
-- Code maintainability
+## Current Issues (lutruwita2)
 
-## User Base
-- Tasmania cyclists and hikers
-- Route planners and sharers
-- Adventure photographers
-- Local cycling groups
+### Performance Problems
+- Map container (1200+ lines) causing render delays
+- Surface detection taking 8-10s for 50km routes
+- Photo uploads failing above 3MB
+- Route saving timeout with >100 waypoints
 
-## Core Requirements
+### User Pain Points
+- "Surface detection unreliable on gravel roads"
+- "App crashes with large GPX files"
+- "Can't save long routes reliably"
+- "Photos take too long to load"
+
+### Technical Debt
+- Monolithic components (map-container.tsx: 1200 lines)
+- Mixed concerns in server.ts (800+ lines)
+- Duplicate state management
+- No error boundaries
+- Minimal testing
+
+## Technical Requirements
+
+### Browser Support
+- Modern browsers (last 2 versions)
+- Mobile Safari/Chrome
+- No IE11 support needed
+- PWA capabilities required
+
+### Performance Targets
+- First Contentful Paint: <2s
+- Time to Interactive: <3s
+- Route Processing: <3s (was 8-10s)
+- Photo Upload: <2s (was 5-7s)
 
 ### Surface Detection
-- Detect road/trail surfaces
-- Categories: paved, gravel, trail
-- Update frequency: daily
-- Source: OpenStreetMap data
+Current Process:
+```mermaid
+graph TD
+    A[GPX Upload] --> B[Parse Coordinates]
+    B --> C[Query PostGIS]
+    C --> D[Match Road Types]
+    D --> E[Calculate Surfaces]
+    E --> F[Save Results]
+```
+Issues:
+- PostGIS queries timeout
+- Incorrect surface matching
+- No caching layer
+- Poor error handling
 
-### Route Processing
-- GPX file requirements:
-  - Max size: 10MB
-  - Required fields: coordinates, elevation
-  - Optional: timestamps, heartrate
-- Processing steps:
-  1. Parse GPX
-  2. Detect surfaces
-  3. Generate elevation profile
-  4. Save route data
+New Approach:
+- Batch processing
+- Surface caching
+- Better error handling
+- Improved algorithms
 
-### Photo System
-- Upload limits: 5MB per photo
-- Location radius: 500m
-- Storage: DigitalOcean Spaces
-- Required metadata:
-  - GPS coordinates
-  - Timestamp
-  - Description (optional)
+### Database Requirements
+Current Issues:
+- MongoDB timeouts with large routes
+- No indexing on location queries
+- Memory issues with photo storage
+
+Solutions:
+- Proper indexing
+- Batch operations
+- DO Spaces for photos
+- Caching layer
+
+### Accessibility
+- WCAG 2.1 AA compliance
+- Keyboard navigation
+- Screen reader support
+- Color contrast requirements
+
+### SEO Requirements
+- Server-side rendering
+- Meta tags for routes
+- Sitemap generation
+- Social sharing support
 
 ## Migration Strategy
 
-### Timeline
-- Phase 0 (Architecture): 1 week
-- Phase 1 (Setup): 1 week
-- Phase 2 (Features): 3 weeks
-- Phase 3 (Backend): 2 weeks
-- Phase 4 (Testing): 1 week
+### MVP (4 weeks)
+1. Basic map display
+2. Simple route creation
+3. Basic surface detection
+4. Photo uploads
+5. User profiles
 
-### MVP Features
-Must have:
-- Basic map display
-- Route creation
-- Surface detection
-- Photo uploads
-- User profiles
+### Phase 2 (4 weeks)
+1. Advanced surface detection
+2. Route optimization
+3. Photo management
+4. Social features
 
-Nice to have:
-- Offline support
-- Route sharing
-- Social features
-- Advanced statistics
+### Technical Goals
+- File size limits enforced
+- 90%+ test coverage
+- TypeScript strict mode
+- Performance monitoring
+- Error tracking
 
-### Performance Targets
-- Initial load: <2s
-- Route processing: <5s
-- Photo upload: <3s
-- Map interaction: 60fps
+## Development Guidelines
 
-### Testing Priorities
-1. Surface detection accuracy
-2. GPX processing reliability
-3. Photo upload/retrieval
-4. User authentication
-5. Route saving/loading
+### Code Standards
+- Max file sizes:
+  - Components: 100 lines
+  - Services: 150 lines
+  - Tests: 200 lines
+  
+### Review Process
+- Performance impact
+- Bundle size changes
+- Test coverage
+- Accessibility check
 
-## Architectural Decisions
-- Small files for maintainability
-- Feature-based organization
-- Strong typing
-- Comprehensive testing
-- Clear documentation
+### Documentation
+Required for all features:
+- Technical specs
+- User documentation
+- API documentation
+- Test coverage report
+
+## Infrastructure
+Current Issues:
+- DigitalOcean basic tier
+- No CDN
+- Single region
+- Limited monitoring
+
+New Setup:
+- DO Premium
+- Cloudflare CDN
+- Multi-region DB
+- Full monitoring
 
 See IMPLEMENTATION_PLAN.md for detailed steps.
