@@ -9,6 +9,7 @@ Interactive mapping platform for Tasmania cyclists and hikers. Complete rebuild 
 4. [Migration Examples](MIGRATION_EXAMPLES.md) - Code comparisons
 5. [API Documentation](API_DOCS.md) - API endpoints
 6. [Database Schema](DATABASE_SCHEMA.md) - Data structure
+7. [Dev Setup](DEV_SETUP.md) - Development environment
 
 ## Project Status
 Migration from lutruwita2 (github.com/vinmasci/lutruwita2)
@@ -18,38 +19,39 @@ Migration from lutruwita2 (github.com/vinmasci/lutruwita2)
 - [ ] Phase 3: Backend Setup (2 weeks)
 - [ ] Phase 4: Testing (1 week)
 
-## Key Features
-- Interactive map with custom styling
-- Route creation and GPX import
-- Surface type detection (paved/unpaved)
-- Location-based photo sharing
-- Custom points of interest
-- User profiles and saved maps
+## Getting Started
+See [DEV_SETUP.md](DEV_SETUP.md) for detailed setup instructions.
 
-## Development Setup
+1. Prerequisites:
+```bash
+# Required
+- Node.js 18+
+- PostgreSQL 14+ with PostGIS
+- MongoDB 6+
+```
 
-1. Clone and install:
+2. Installation:
 ```bash
 git clone https://github.com/vinmasci/lutruwita_map.git
 cd lutruwita_map
-npm install
+pnpm install
 ```
 
-2. Environment (.env.local):
-```
-VITE_MAPBOX_TOKEN=
-AUTH0_SECRET=
-AUTH0_CLIENT_SECRET=
-VITE_MONGODB_URI=
-```
-
-3. Development server:
+3. Development:
 ```bash
-npm run dev
+pnpm dev    # Frontend
+pnpm server # Backend
 ```
+
+## Key Features
+- Interactive map
+- Route creation/GPX import
+- Surface detection
+- Photo sharing
+- User profiles
 
 ## Contributing
-1. Review all documentation files for context
-2. Follow architecture guidelines
-3. Check migration examples for patterns
-4. Use implementation plan for tasks
+1. Review documentation
+2. Follow coding guidelines
+3. Write tests
+4. Submit PRs
