@@ -16,7 +16,8 @@ Migrating from lutruwita2 (github.com/vinmasci/lutruwita2):
     "zustand": "^4.5.0",
     "@auth0/auth0-react": "^2.2.1",
     "express": "^4.18.2",
-    "mongodb": "^5.7.0"
+    "mongodb": "^5.7.0",
+    "@mapbox/mapbox-matching": "^0.5.0"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
@@ -64,10 +65,31 @@ Source: map-container.tsx
   - Layer system
   - Notes:
 
-- [ ] Route features
-  - GPX upload
-  - Drawing tools
-  - Surface detection
+### Surface Detection Module
+Source: gpx-processor.ts
+- [ ] Map Matching Integration
+  - Mapbox Map Matching API setup
+  - GPS drift handling
+  - Confidence scoring
+  - Notes:
+
+- [ ] Surface Cache System
+  - Cache service implementation
+  - TTL management
+  - Invalidation strategy
+  - Notes:
+
+- [ ] PostGIS Integration
+  - Optimized queries
+  - Batch processing
+  - Error handling
+  - Notes:
+
+- [ ] Monitoring
+  - Processing times
+  - Cache hit rates
+  - Error tracking
+  - Surface distribution
   - Notes:
 
 ### Photo Module
@@ -91,6 +113,7 @@ Source: server.ts
 - [ ] Map endpoints
   - CRUD operations
   - Surface detection
+  - Map matching
   - Notes:
 
 - [ ] Photo endpoints
@@ -103,6 +126,7 @@ Source: server.ts
   - User collection
   - Routes collection
   - Photos collection
+  - Surface cache collection
   - Notes:
 
 ## Phase 4: Testing [Status: Not Started]
@@ -115,6 +139,7 @@ Source: server.ts
   - Components
   - Services
   - API endpoints
+  - Surface matching
   - Notes:
 
 ## Feature Parity Checklist
@@ -122,7 +147,8 @@ From lutruwita2:
 - [ ] Map display/controls
 - [ ] Route creation
 - [ ] GPX processing
-- [ ] Surface detection
+- [ ] Surface detection with Map Matching
+- [ ] Surface caching system
 - [ ] Photo upload
 - [ ] Location markers
 - [ ] User profiles
@@ -132,5 +158,5 @@ From lutruwita2:
 ## Progress Updates
 Add notes and completion dates here.
 
-Last Updated: 2025-01-23
+Last Updated: 2025-01-24
 Current Phase: Planning
