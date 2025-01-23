@@ -1,54 +1,88 @@
 # Lutruwita Map
 
-A clean, maintainable reimplementation of lutruwita2 focused on maps and cycling routes in Tasmania.
+Complete rebuild of lutruwita2 focusing on maintainability and performance.
 
-## Features
-- Interactive mapping with custom surfaces
-- GPX route upload and visualization
+## Project Status
+Migration from lutruwita2 (github.com/vinmasci/lutruwita2)
+- [ ] Phase 0: Architecture Setup
+- [ ] Phase 1: Project Setup
+- [ ] Phase 2: Core Features
+- [ ] Phase 3: Server Setup
+- [ ] Phase 4: Testing
+
+## Improvements Over lutruwita2
+| Feature | lutruwita2 | lutruwita_map |
+|---------|------------|---------------|
+| File Size | 1000+ line components | Max 100 lines |
+| State | Mixed/scattered | Zustand + Context |
+| Testing | Minimal | Full coverage |
+| TypeScript | Partial | Strict mode |
+| Architecture | Monolithic | Feature modules |
+
+## Core Features
+- Interactive map with custom styling
+- Route creation and GPX import
+- Surface type detection (paved/unpaved)
 - Location-based photo sharing
 - Custom points of interest
-- User profiles and saved routes
+- User profiles and saved maps
 
 ## Architecture
-- Clean, modular code (max 100-150 lines per file)
-- Feature-based organization
-- Isolated business logic
-- Strong typing with TypeScript
-
 ```
 src/
-  features/           # Core functionality modules
-    maps/            # Map and route features
+  features/           # Core functionality
+    maps/            # Map/route features
     photos/          # Photo management 
     auth/            # Authentication
-  shared/            # Reusable components
+  shared/            # Reusable code
   lib/               # Core utilities
   app/               # Application entry
+```
 
-server/              # Backend services
-  routes/            # API endpoints
-  services/          # Business logic
-  middleware/        # Request processing
+## Component Flow
+```mermaid
+graph TD
+    A[MapView] --> B[RouteLayer]
+    A --> C[SurfaceLayer]
+    A --> D[PhotoLayer]
+    B --> E[GPX Processing]
+    C --> F[Surface Detection]
+    D --> G[Photo Upload]
 ```
 
 ## Tech Stack
-- React 18 + TypeScript
-- Mapbox GL for mapping
-- Auth0 authentication
-- Express + MongoDB
-- Zustand state management
+- Frontend: React 18 + TypeScript
+- Maps: Mapbox GL 
+- State: Zustand + Context
+- Backend: Express + MongoDB
+- Storage: DO Spaces
+- Auth: Auth0
 
-## Development
+## Development Setup
+
+1. Clone repository:
 ```bash
-npm install
-npm run dev
+git clone https://github.com/vinmasci/lutruwita_map.git
+cd lutruwita_map
 ```
 
-## Environment
-Required in .env.local:
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Environment setup (.env.local):
 ```
 VITE_MAPBOX_TOKEN=
 AUTH0_SECRET=
 AUTH0_CLIENT_SECRET=
 VITE_MONGODB_URI=
 ```
+
+4. Development server:
+```bash
+npm run dev
+```
+
+## Contributing
+See IMPLEMENTATION_PLAN.md for current tasks and ARCHITECTURE_PLAN.md for guidelines.
