@@ -1,65 +1,42 @@
 # Lutruwita Map
 
-Interactive mapping platform for Tasmania, specifically designed for cyclists and hikers to:
-- Create and share routes
-- Track surface types (paved/unpaved)
-- Share location-based photos
-- Save custom maps and points of interest
+A clean, maintainable reimplementation of lutruwita2 focused on maps and cycling routes in Tasmania.
 
-## Current Project Status
-Complete rebuild focused on:
-- Cleaner architecture
-- Smaller, focused components
-- Better state management
-- Improved performance
-- Enhanced testing
+## Features
+- Interactive mapping with custom surfaces
+- GPX route upload and visualization
+- Location-based photo sharing
+- Custom points of interest
+- User profiles and saved routes
 
 ## Architecture
-```
-├── src/
-│   ├── features/           # Feature-based modules
-│   │   ├── auth/          # Authentication
-│   │   ├── maps/          # Map functionality
-│   │   ├── photos/        # Photo management
-│   │   └── profiles/      # User profiles
-│   │
-│   ├── shared/            # Shared resources
-│   │   ├── components/    # Reusable UI
-│   │   ├── hooks/        # Common hooks
-│   │   ├── utils/        # Helper functions
-│   │   └── types/        # Global types
-│   │
-│   ├── lib/              # Core functionality
-│   │   ├── api/         # API client
-│   │   ├── config/      # App config
-│   │   └── db/          # Database
-│   │
-│   └── app/             # App core
-│       ├── layout/      # Layout components
-│       ├── routes/      # Route definitions
-│       └── providers/   # Context providers
+- Clean, modular code (max 100-150 lines per file)
+- Feature-based organization
+- Isolated business logic
+- Strong typing with TypeScript
 
-├── server/              # Backend
-│   ├── routes/         # API routes
-│   ├── services/       # Business logic
-│   ├── middleware/     # Express middleware
-│   └── config/         # Server config
 ```
+src/
+  features/           # Core functionality modules
+    maps/            # Map and route features
+    photos/          # Photo management 
+    auth/            # Authentication
+  shared/            # Reusable components
+  lib/               # Core utilities
+  app/               # Application entry
 
-## Key Features
-- Interactive map with custom styling
-- Route creation and saving
-- Surface type detection
-- Photo uploads with location
-- User profiles and saved maps
-- GPX file support
+server/              # Backend services
+  routes/            # API endpoints
+  services/          # Business logic
+  middleware/        # Request processing
+```
 
 ## Tech Stack
-- Frontend: React 18, TypeScript, Mapbox GL
-- Backend: Express, MongoDB
-- Auth: Auth0
-- Storage: DO Spaces
-- Maps: Mapbox
+- React 18 + TypeScript
+- Mapbox GL for mapping
+- Auth0 authentication
+- Express + MongoDB
+- Zustand state management
 
 ## Development
 ```bash
