@@ -20,3 +20,18 @@ export interface Surface {
   confidence: number
   wayId: string
 }
+
+export interface MatchedSegment {
+  coordinates: [number, number][]
+  confidence: number
+  wayId: string
+}
+
+export interface SurfaceSegment {
+  surface: string
+  geometry: {
+    type: 'LineString'
+    coordinates: [number, number][]
+  }
+  confidence: number
+}
