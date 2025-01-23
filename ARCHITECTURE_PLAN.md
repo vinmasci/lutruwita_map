@@ -1,93 +1,122 @@
 # Architecture Plan
 
-## Current Issues (from lutruwita2)
-1. Monolithic components (map-container.tsx)
-2. Mixed concerns in server.ts
-3. Scattered state management
-4. Deep component nesting in POI system
-5. Duplicated logic across services
+## Previous Issues (lutruwita2)
+- Monolithic components (1000+ lines)
+- Mixed concerns in server
+- Scattered state management
+- Deep nesting in UI components
+- Duplicate business logic
 
-## Architecture Decisions
+## Core Architecture
 
-### 1. File Size Rules
-- Components: max 100 lines
-- Services: max 150 lines
-- Test files: max 200 lines
-- TypeScript files: strict mode required
-
-### 2. Feature Module Structure
-```
-src/features/map/
+### Component Structure
+```tsx
+// Example feature module
+features/map/
   components/
     MapView/
-      index.tsx           # Container (50 lines)
-      Controls.tsx        # UI controls (50 lines)
-      types.ts           # Types only
+      index.tsx           # Container
+      MapControls.tsx     # UI controls
+      types.ts           # Type definitions
       styles.module.css   # Scoped styles
-    RouteLayer/
-    SurfaceLayer/
-  hooks/
-    useMapControls.ts     # Single responsibility
-    useMapState.ts
-  services/
-    mapService.ts        # API calls only
-    routeService.ts 
-  context/
-    MapContext.tsx       # Global map state
 ```
 
-### 3. State Management
-- Zustand for complex state (maps, routes)
-- React Context for UI state
-- No prop drilling
-- Computed values in hooks
+### State Management
+```tsx
+// Zustand store example
+interface MapStore {
+  center: [number, number]
+  zoom: number
+  routes: Route[]
+  setCenter: (center: [number, number]) => void
+}
 
-### 4. Breaking Down Monoliths
+const useMapStore = create<MapStore>((set) => ({
+  center: [146.8087, -41.4419],
+  zoom: 12,
+  routes: [],
+  setCenter: (center) => set({ center })
+}))
+```
 
-#### Map Container Split:
+### Database Schema
 ```typescript
-// Before: map-container.tsx (1000+ lines)
-// After:
-features/map/
-  MapView/               # Basic map setup
-  RouteLayer/           # Route handling
-  SurfaceLayer/         # Surface types
-  PhotoLayer/           # Photo markers
-  ControlsLayer/        # UI controls
+interface Route {
+  _id: ObjectId
+  name: string
+  description?: string
+  gpxData: string
+  surfaces: Surface[]
+  createdBy: string
+  createdAt: Date
+}
+
+interface Photo {
+  _id: ObjectId
+  filename: string
+  location: [number, number]
+  takenBy: string
+  uploadedAt: Date
+}
 ```
 
-#### Server Split:
+### API Endpoints
 ```typescript
-server/
-  routes/
-    map.routes.ts      # Map endpoints
-    photo.routes.ts    # Photo handling
-    auth.routes.ts     # Auth routes
-  services/           # Business logic
-  middleware/         # Auth, validation
+// Maps
+POST   /api/maps      // Create map
+GET    /api/maps      // List maps
+PUT    /api/maps/:id  // Update map
+DELETE /api/maps/:id  // Delete map
+
+// Photos
+POST   /api/photos/upload  // Upload photo
+GET    /api/photos/near    // Get nearby photos
+
+// Auth
+GET    /api/profile       // Get profile
+PUT    /api/profile      // Update profile
 ```
 
-### 5. Testing Architecture
-```
-features/map/
-  __tests__/
-    unit/             # Component tests
-    integration/      # Feature tests
-  components/
-    __tests__/       # Component-specific tests
+## File Size Rules
+- Components: max 100 lines
+- Services: max 150 lines
+- Tests: max 200 lines
+- TypeScript: strict mode
+
+## Testing Strategy
+```typescript
+// Component test example
+describe('MapView', () => {
+  it('renders map with correct center', () => {
+    render(<MapView center={[146.8087, -41.4419]} />)
+    expect(screen.getByTestId('map')).toBeInTheDocument()
+  })
+})
 ```
 
-### 6. Documentation Requirements
-- README.md per feature module
-- Props documentation
-- Example usage
+## Migration Mapping
+Old → New Location:
+- map-container.tsx → features/maps/components/MapView/
+- server.ts → server/routes/ (split by feature)
+- photo-modal.tsx → features/photos/components/PhotoUpload/
+
+## Documentation
+Each feature module requires:
+- README.md with usage examples
+- TypeScript interfaces
+- Component props documentation
 - Test coverage report
 
-## Migration Path
-1. Setup core architecture
-2. Create feature modules
-3. Migrate components
-4. Add tests
-5. Document
-
-Progress tracked in IMPLEMENTATION_PLAN.md
+## Error Handling
+```typescript
+// Global error boundary
+export const ErrorBoundary = ({ children }) => {
+  const [error, setError] = useState<Error | null>(null)
+  
+  if (error) {
+    return <ErrorDisplay error={error} />
+  }
+  
+  return children
+}
+```
