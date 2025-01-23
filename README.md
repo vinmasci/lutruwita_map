@@ -1,6 +1,12 @@
 # Lutruwita Map
 
-Interactive mapping platform for Tasmania cyclists and hikers. Complete rebuild of lutruwita2 focusing on maintainability and performance.
+Interactive mapping application for Tasmania cyclists and hikers. This is a restructured version of lutruwita2, focusing on maintainability and performance through improved architecture.
+
+## Project Goals
+- Migrate functionality from lutruwita2 into a cleaner component structure
+- Improve performance of map rendering and surface detection
+- Enhance maintainability through modular design
+- Reduce file sizes and component complexity
 
 ## Documentation
 1. [Project Context](PROJECT_CONTEXT.md) - Background and requirements
@@ -38,6 +44,11 @@ Migration from lutruwita2 (github.com/vinmasci/lutruwita2)
 - Mapbox API key
 ```
 
+## Development
+- Each component is built by referencing the original lutruwita2 code
+- Components are split into smaller, focused modules
+- File size limits enforced per [Implementation Plan](IMPLEMENTATION_PLAN.md)
+
 ## Quick Start
 ```bash
 git clone https://github.com/vinmasci/lutruwita_map.git
@@ -45,9 +56,3 @@ cd lutruwita_map
 pnpm install
 pnpm dev
 ```
-
-## Contributing
-1. Review documentation
-2. Follow code standards
-3. Write tests
-4. Submit PRs
