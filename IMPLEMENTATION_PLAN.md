@@ -52,14 +52,19 @@ Migrating from lutruwita2 (github.com/vinmasci/lutruwita2):
   - Path aliases
   - Build setup
 
-## Phase 2: Features [Status: Not Started]
+## Phase 2: Features [Status: In Progress]
 
-### Map Module
+### Map Module [Status: In Progress]
 Source: map-container.tsx
-- [ ] Base components
-  - MapView
-  - Controls
-  - Layer system
+- [x] Base components
+  - MapView: Basic map with terrain and roads
+  - Controls: Upload and save buttons
+  - Layer system: Toggle map features
+- [ ] Additional features
+  - GPX upload handler
+  - Route display
+  - Surface detection integration
+  - Photo markers
 
 ### Surface Detection Module
 Source: gpx-processor.ts
@@ -129,7 +134,7 @@ Source: server.ts
 
 ## Feature Parity Checklist
 From lutruwita2:
-- [ ] Map display/controls
+- [x] Map display/controls
 - [ ] Route creation
 - [ ] GPX processing
 - [ ] Surface detection with Map Matching
@@ -140,5 +145,7 @@ From lutruwita2:
 - [ ] Saved routes
 
 ## Progress Updates
-2025-01-24: Completed Phase 0 (Architecture) and Phase 1 (Project Setup)
+2025-01-24: 
+- Completed Phase 0 (Architecture) and Phase 1 (Project Setup)
+- Created base map components (MapView, MapControls, LayerSystem)
 Current Phase: Phase 2 (Features)
