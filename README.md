@@ -2,11 +2,13 @@
 
 Interactive mapping platform for Tasmania cyclists and hikers. Complete rebuild of lutruwita2 focusing on maintainability and performance.
 
-## Project Documentation
+## Documentation
 1. [Project Context](PROJECT_CONTEXT.md) - Background and requirements
 2. [Architecture Plan](ARCHITECTURE_PLAN.md) - Technical design
 3. [Implementation Plan](IMPLEMENTATION_PLAN.md) - Step-by-step guide
 4. [Migration Examples](MIGRATION_EXAMPLES.md) - Code comparisons
+5. [API Documentation](API_DOCS.md) - API endpoints
+6. [Database Schema](DATABASE_SCHEMA.md) - Data structure
 
 ## Project Status
 Migration from lutruwita2 (github.com/vinmasci/lutruwita2)
