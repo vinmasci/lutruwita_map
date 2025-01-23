@@ -2,8 +2,11 @@
 
 Interactive mapping platform for Tasmania cyclists and hikers. Complete rebuild of lutruwita2 focusing on maintainability and performance.
 
-## Project Overview
-See [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) for detailed background and requirements.
+## Project Documentation
+1. [Project Context](PROJECT_CONTEXT.md) - Background and requirements
+2. [Architecture Plan](ARCHITECTURE_PLAN.md) - Technical design
+3. [Implementation Plan](IMPLEMENTATION_PLAN.md) - Step-by-step guide
+4. [Migration Examples](MIGRATION_EXAMPLES.md) - Code comparisons
 
 ## Project Status
 Migration from lutruwita2 (github.com/vinmasci/lutruwita2)
@@ -20,12 +23,6 @@ Migration from lutruwita2 (github.com/vinmasci/lutruwita2)
 - Location-based photo sharing
 - Custom points of interest
 - User profiles and saved maps
-
-## Architecture
-See [ARCHITECTURE_PLAN.md](ARCHITECTURE_PLAN.md) for detailed design.
-
-## Implementation
-See [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) for step-by-step guide.
 
 ## Development Setup
 
@@ -50,6 +47,7 @@ npm run dev
 ```
 
 ## Contributing
-1. Read PROJECT_CONTEXT.md for background
-2. Review ARCHITECTURE_PLAN.md for guidelines
-3. Follow IMPLEMENTATION_PLAN.md for tasks
+1. Review all documentation files for context
+2. Follow architecture guidelines
+3. Check migration examples for patterns
+4. Use implementation plan for tasks
